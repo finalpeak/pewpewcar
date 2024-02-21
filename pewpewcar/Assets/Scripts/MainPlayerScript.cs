@@ -11,13 +11,10 @@ public class MainPlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Hello World");
-
         Rigidbody rb = GetComponent<Rigidbody>();
 
         if(rb != null){
-            //rb.useGravity = true;
-            rb.AddForce(Vector3.up * 1000f);
+            rb.useGravity = true;
         }
     }
 
