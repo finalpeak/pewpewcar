@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -443,7 +443,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &549355429
 MeshRenderer:
@@ -646,7 +646,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &823628020
 MeshRenderer:
@@ -967,7 +967,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &970165745
 MeshRenderer:
@@ -1254,13 +1254,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e78534202f0ef764b93c0730c82d0d1d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1315201695}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e78534202f0ef764b93c0730c82d0d1d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1315201698}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e78534202f0ef764b93c0730c82d0d1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1315201699}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e78534202f0ef764b93c0730c82d0d1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1315201700}
     - targetCorrespondingSourceObject: {fileID: -885264430177597064, guid: e78534202f0ef764b93c0730c82d0d1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 979420575}
@@ -1433,20 +1433,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e78534202f0ef764b93c0730c82d0d1d, type: 3}
   m_PrefabInstance: {fileID: 1015709668}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1315201695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1315201694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38693e842d8664d46a99bb5b45832dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  carCoords3d: {x: 0, y: 0, z: 0}
 --- !u!54 &1315201698
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1471,9 +1457,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1315201699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1489,8 +1475,29 @@ MonoBehaviour:
   acceleration: 20
   deceleration: 30
   maxSpeed: 50
-  baseRotationSpeed: 180
-  turnSpeedMultiplier: 0.25
+  turnSpeed: 50
+  brakeForce: 20
+--- !u!65 &1315201700
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315201694}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.65, y: 0.3, z: 0.5}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &1448818526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,10 +1785,10 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1863258649
 MeshRenderer:

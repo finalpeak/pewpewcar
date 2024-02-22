@@ -7,42 +7,38 @@ public class MovementTest : MonoBehaviour
     public float acceleration = 5f;
     public float deceleration = 10f;
     public float maxSpeed = 10f;
-    public float baseRotationSpeed = 180f;
-    public float turnSpeedMultiplier = 0.5f;
+    public float turnSpeed = 50f;
+    public float brakeForce = 20f;
 
     private float currentSpeed = 0f;
 
     void Update()
     {
-        // Get input from the keyboard
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        // Calculate the movement and rotation
-        Vector3 movement = new Vector3(horizontalInput, 0f, 0f).normalized;
-        Vector3 rotation = new Vector3(0f, horizontalInput, 0f);
-
-        // Apply acceleration to the current speed
-        currentSpeed += verticalInput * acceleration * Time.deltaTime;
-        currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
-
-        // Apply deceleration when not accelerating
-        if (verticalInput == 0f)
+        // Calculate acceleration and deceleration
+        if (verticalInput > 0f)
         {
-            float decelerationAmount = deceleration * Time.deltaTime;
-            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, decelerationAmount);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
         }
 
-        // Calculate the movement based on the current speed
-        Vector3 velocity = transform.right * currentSpeed;
+        // Calculate movement and rotation
+        Vector3 movement = transform.right * currentSpeed * Time.deltaTime; // Use transform.right instead of transform.forward
+        float rotation = horizontalInput * turnSpeed * Time.deltaTime;
 
-        // Move the object based on the input
-        transform.Translate(velocity * Time.deltaTime, Space.World);
+        // Apply movement and rotation
+        transform.Translate(movement, Space.World);
+        transform.Rotate(Vector3.up * rotation);
 
-        // Calculate the turn speed based on the current speed
-        float currentTurnSpeed = baseRotationSpeed * Mathf.Clamp01(1f - Mathf.Abs(currentSpeed / maxSpeed) * turnSpeedMultiplier);
-
-        // Rotate the object based on the input and turn speed
-        transform.Rotate(rotation * currentTurnSpeed * Time.deltaTime);
+        // Braking
+        if (Input.GetKey(KeyCode.Space))
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, brakeForce * Time.deltaTime);
+        }
     }
 }
